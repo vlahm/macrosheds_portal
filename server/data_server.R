@@ -37,14 +37,17 @@ output$VARIABLE_CATALOG <- DT::renderDataTable(
 
 output$VARIABLE_SUBCATALOG <- DT::renderDataTable({
 
+    req(input$VARIABLE_SUBCATALOG_BUTTON_LISTENER)
     d <- sm(readr::read_csv(glue('data/general/catalog_files/indiv_variables/{v}.csv',
-                         v = isolate(input$VARIABLE_SUBCATALOG_BUTTON_LISTENER))))
+                         v = input$VARIABLE_SUBCATALOG_BUTTON_LISTENER)))
     DT::datatable(d, options = list(scrollX = 'true'))
 })
 
 output$SITE_SUBCATALOG <- DT::renderDataTable({
+
+    req(input$SITE_SUBCATALOG_BUTTON_LISTENER)
     d <- sm(readr::read_csv(glue('data/general/catalog_files/indiv_sites/{s}.csv',
-                         s = isolate(input$SITE_SUBCATALOG_BUTTON_LISTENER))))
+                         s = input$SITE_SUBCATALOG_BUTTON_LISTENER)))
     DT::datatable(d, options = list(scrollX = 'true'))
 })
 
