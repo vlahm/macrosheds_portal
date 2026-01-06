@@ -476,8 +476,7 @@ generate_dropdown_varlist <- function(chemvars, filter_set = NULL) {
 filter_dropdown_varlist <- function(filter_set, vartype = "stream") {
 
     # filter_set = sw(select(filter_set, -one_of('site_code', 'datetime')))
-
-    if (nrow(filter_set) == 0) {
+    if (length(filter_set) == 0 || nrow(filter_set) == 0) {
         return(list(
             Anions = c(),
             Cations = c(),
@@ -540,6 +539,9 @@ ms_aggregate <- function(d, agg_selection) { # , conc_flux_selection = NULL){
     # agg_selection is a user input object, e.g. input$AGG3
     # OBSOLETE conc_flux_selection is a user input object, e.g. input$CONC_FLUX3
 
+    if(length(d) == 0){
+        return(tibble())
+    }
     if (nrow(d) <= 1) {
         return(d)
     }
@@ -791,6 +793,11 @@ convert_portal_units <- function(d,
                                  conc_flux_selection,
                                  conc_unit,
                                  flux_unit) {
+
+    if(length(d) == 0){
+        return(tibble())
+    }
+
     if (nrow(d) == 0) {
         return(d)
     }
@@ -1307,6 +1314,10 @@ filter_and_unprefix <- function(d,
                                 show_flagged,
                                 show_imputed) {
     # conc_or_flux){
+
+    if(length(d) == 0){
+        return(tibble())
+    }
 
     if (nrow(d) == 0) {
         return(d)

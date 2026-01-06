@@ -103,6 +103,4 @@ landing_page <- quote({
             )
         )
     )
-
-    init_vals$enable_unitconvert <- TRUE
 })

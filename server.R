@@ -30,6 +30,10 @@ server <- function(input, output, session) {
   init_vals$initial_plots_loaded <- FALSE
   init_vals$ts_tab_is_pristine <- TRUE
 
+  session$onFlushed(function() {
+    init_vals$enable_unitconvert <- TRUE
+  }, once = TRUE)
+
   observeEvent(input$COLLAPSE_SIDEBAR, {
     shinyjs::toggleClass(
       selector = ".sidebar-sub",

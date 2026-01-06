@@ -368,6 +368,10 @@ dataChem <- eventReactive(
             agg_selection = agg
         )
 
+        if(length(datachem) == 0){
+          return(tibble())
+        }
+
         if (nrow(datachem) == 0) {
             return(datachem)
         }
@@ -742,6 +746,10 @@ dataPrecip <- eventReactive(
             agg_selection = agg
         )
 
+        if(length(dataP) == 0){
+          return(tibble())
+        }
+
         if (nrow(dataP) == 0) {
             return(dataP)
         }
@@ -786,6 +794,10 @@ dataQ <- eventReactive(
             d = dataQ,
             agg_selection = agg
         )
+
+        if(length(dataQ) == 0){
+          return(tibble())
+        }
 
         if (nrow(dataQ) == 0) {
             return(dataQ)
@@ -1893,7 +1905,7 @@ output$GRAPH_Q3 <- renderDygraph({
         error = function(e) NULL
     )
 
-    if (nrow(dataq)) {
+    if (length(dataq) > 0 && nrow(dataq)) {
         dataq <- select(
             dataq,
             datetime, any_of(sites)
